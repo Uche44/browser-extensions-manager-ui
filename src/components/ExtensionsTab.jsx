@@ -2,7 +2,7 @@ import { useLightMode } from "../context/LightMode";
 
 const ExtensionsTab = ({ activeIndex, setActiveIndex }) => {
   const { isLightMode } = useLightMode();
-  const lists = ["All", "Active", "Inactive"];
+  const lists = ["All", "Active", "InActive"];
 
   return (
     <>
@@ -21,9 +21,9 @@ const ExtensionsTab = ({ activeIndex, setActiveIndex }) => {
               key={index}
               value={list}
               className={`text-[1.2em] py-2 px-5 border-gray-400 text-white border-2 cursor-pointer rounded-[2.5rem] ${
-                activeIndex === index ? "bg-red-500" : "bg-gray-700"
+                activeIndex === list ? "bg-red-500" : "bg-gray-700"
               }`}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => setActiveIndex(list)}
             >
               {list}
             </div>

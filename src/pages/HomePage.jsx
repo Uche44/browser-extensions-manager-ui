@@ -6,7 +6,7 @@ import { useLightMode } from "../context/LightMode";
 
 const HomePage = () => {
   const { isLightMode } = useLightMode();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState('All');
 
   return (
     <section
@@ -20,7 +20,7 @@ const HomePage = () => {
         setActiveIndex={setActiveIndex}
       />
       <Extensions
-      // activeIndex={activeIndex}
+      activeIndex={activeIndex}
       // setActiveIndex={setActiveIndex}
       />
     </section>
