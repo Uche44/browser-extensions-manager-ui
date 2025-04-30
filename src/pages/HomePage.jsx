@@ -20,8 +20,8 @@ const HomePage = () => {
         setActiveIndex={setActiveIndex}
       />
       <Extensions
-        activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
+      // activeIndex={activeIndex}
+      // setActiveIndex={setActiveIndex}
       />
     </section>
   );
