@@ -1,9 +1,16 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 const LightModeContext = createContext();
 
 export const LightModeProvider = ({ children }) => {
-  const [isLightMode, setIsLightMode] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(() => {
+    const savedMode = localStorage.getItem("isLightMode");
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("isLightMode", JSON.stringify(isLightMode));
+  });
 
   const toggleLightMode = () => {
     setIsLightMode((prev) => !prev);
@@ -21,4 +28,4 @@ export const useLightMode = () => {
     throw new Error("useLightMode must be used within a LightModeProvider");
   }
   return context;
-}
+};

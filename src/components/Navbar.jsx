@@ -7,7 +7,7 @@ const Navbar = () => {
     <header
       className={`h-[4.5rem] w-full ${
         isLightMode ? "bg-white" : "bg-gray-600"
-      } rounded-2xl flex justify-between p-4 `}
+      } rounded-2xl flex justify-between p-4 md:max-w-[1200px] `}
     >
       <img
         src="/assets/images/logo.svg"
@@ -15,7 +15,9 @@ const Navbar = () => {
       />
       <button
         onClick={toggleLightMode}
-        className="w-12 h-full  rounded-xl bg-gray-500 grid place-content-center cursor-pointer"
+        className={`w-12 h-full  rounded-xl grid place-content-center cursor-pointer ${
+          isLightMode ? "bg-blue-200" : "bg-gray-500"
+        }`}
       >
         <img
           src={

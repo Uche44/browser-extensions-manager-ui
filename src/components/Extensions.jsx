@@ -1,11 +1,12 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ToggleRight, ToggleLeft } from "lucide-react";
 import { useLightMode } from "../context/LightMode";
+import { animate } from "motion";
 
 const Extensions = ({ activeIndex }) => {
   const { isLightMode } = useLightMode();
   const [extensions, setExtensions] = useState([]);
+  const cardsRef = useRef([]);
 
   const fetchExtensions = async () => {
     const response = await fetch("/data.json");
@@ -25,22 +26,33 @@ const Extensions = ({ activeIndex }) => {
     fetchExtensions();
   }, [activeIndex]);
 
+  useEffect(() => {
+    cardsRef.current.forEach((card, i) => {
+      if (card) {
+        animate(
+          card,
+          { opacity: [0, 1], y: [-20, 0] },
+          { delay: i * 0.05, duration: 0.4, easing: "ease-out" }
+        );
+      }
+    });
+  }, [extensions]);
+
   const removeExtension = (index) => {
-    setExtensions((prevExtensions) =>
-      prevExtensions.filter((_, i) => i !== index)
-    );
+    setExtensions((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
-    <section className="w-full h-fit md:grid md:grid-cols-3 md:gap-x-4 ">
+    <section className="w-full h-fit md:grid md:grid-cols-3 md:gap-x-4 md:max-w-[1200px]">
       {extensions.map((extension, index) => (
         <div
           key={index}
+          ref={(el) => (cardsRef.current[index] = el)}
           className={`w-full h-[13rem] rounded-2xl flex justify-between px-4 py-5 mt-4 relative ${
             isLightMode ? "bg-white" : "bg-gray-600"
           }`}
         >
-          <div className="flex ">
+          <div className="flex">
             <img
               src={extension.logo}
               alt=""
@@ -58,8 +70,10 @@ const Extensions = ({ activeIndex }) => {
 
           <div className="flex w-70 items-center justify-between absolute bottom-[1rem] md:w-[90%]">
             <button
-              className={`text-white px-3 py-1 rounded-[2rem] border-gray-200 border-1 ${
-                isLightMode ? "border-gray-700" : "border-gray-200"
+              className={`px-3 py-1 rounded-[2rem] border-1 cursor-pointer ${
+                isLightMode
+                  ? "border-gray-700 text-gray-700"
+                  : "border-gray-200 text-white"
               }`}
               onClick={() => removeExtension(index)}
             >

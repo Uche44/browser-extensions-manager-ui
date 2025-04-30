@@ -1,13 +1,19 @@
-import React from "react";
-// import { useState } from "react";
+import { useLightMode } from "../context/LightMode";
 
 const ExtensionsTab = ({ activeIndex, setActiveIndex }) => {
+  const { isLightMode } = useLightMode();
   const lists = ["All", "Active", "Inactive"];
 
   return (
     <>
-      <section className="w-full h-fit flex flex-col items-center mt-4 md:flex-row md:justify-between">
-        <h1 className="text-white font-bold text-[2.8rem]">Extensions List</h1>
+      <section className="w-full h-fit flex flex-col items-center mt-4 md:flex-row md:justify-between md:max-w-[1200px]">
+        <h1
+          className={`font-bold text-[2.8rem] ${
+            isLightMode ? "text-[#141d57]" : "text-white"
+          }`}
+        >
+          Extensions List
+        </h1>
 
         <div className="h-fit w-full flex justify-between px-4 mt-3 md:w-[27%]">
           {lists.map((list, index) => (
