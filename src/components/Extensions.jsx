@@ -9,7 +9,7 @@ const Extensions = ({ activeIndex }) => {
   const cardsRef = useRef([]);
 
   const fetchExtensions = async () => {
-    const response = await fetch("/data.json");
+    const response = await fetch("./data.json");
     const data = await response.json();
     if (activeIndex === 0) {
       setExtensions(data);
