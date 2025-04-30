@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <section
       className={`w-full min-h-screen p-4 flex flex-col items-center md:px-[5rem] ${
-        isLightMode ? "bg-[#cbd9f2]" : "bg-[#141d57]"
+        isLightMode ? "bg-blue-200" : "bg-[#141d57]"
       }`}
     >
       <Navbar />
